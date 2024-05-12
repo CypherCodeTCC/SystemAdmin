@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-    min-height: 90vh;
+    min-height: 89vh;
     padding: 30px;
     gap: 40px;
     display: flex;
@@ -34,6 +34,7 @@ export const Container = styled.section`
             color: white;
             padding: 10px;
             border-radius: 8px;
+            cursor: pointer;
         }
 }
 
