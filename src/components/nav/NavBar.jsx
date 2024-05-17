@@ -1,5 +1,6 @@
 import PngLogo  from '../../../public/logotipo.png'
 import PngUser from '../../../public/user.png'
+import MobileMenu from './mobile/MobileMenu';
 import { Container } from './navBarStyle';
 
 export default function NavBar() {
@@ -12,7 +13,8 @@ export default function NavBar() {
                 <div className='container-icons'>
                     <img src={PngUser} alt="Botão para logar" />
                 </div>
-            </Container>
+                <MobileMenu/>
+            </Container>          
         </>
     );
 }
