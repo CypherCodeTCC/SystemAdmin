@@ -10,121 +10,186 @@ export const Container = styled.section`
 
   font-family: "Inter", Arial, Helvetica, sans-serif;
 
-  .container-options {
-    display: flex;
-    flex-direction: column;
-    height: max-content;
-
-    .list-options {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
+  .blue {
+    color: blue;
   }
 
-  li {
-    list-style-type: none;
+  img {
+    width: 32px;
+    height: 35px;
   }
 
-  a {
+  h2 {
+    padding-top: 20px;
+  }
+`;
+
+export const ContainerOptions = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+
+  @media (min-width: 802px) and (max-width: 1150px) {
+    display: none;
+  }
+
+  @media (max-width: 801px) {
+    display: none;
+  }
+`;
+
+export const ListOptions = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
+export const LiOptions = styled.li`
+  list-style-type: none;
+`
+
+export const AOptions = styled.a`
     color: #b1b1b1;
     font-size: 18px;
     font-weight: 500;
     text-decoration: none;
-  }
+    cursor: pointer;
+`
 
-  .container-infos {
-    display: flex;
+export const Containerinfos = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  height: max-content;
+  width: 60%;
+
+  @media (min-width: 802px) and (max-width: 1150px) {
+    width: 100%;
     justify-content: center;
-    gap: 30px;
-    height: max-content;
-    width: 60%;
   }
 
-  .container-config {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  @media (max-width: 801px) {
+    width: 100%;
+    justify-content: center;
+  }
+`;
 
-    .border {
-      background-color: #e7edff;
-      border-radius: 20px;
-      width: 70px;
-      height: 70px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+export const ContainerConfig = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    .item{
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    img {
-      width: 32px;
-      height: 35px;
-    }
+  @media (min-width: 802px) and (max-width: 1150px) {
+    display: none;
   }
 
-  .container-texts {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  @media (max-width: 801px) {
+    display: none;
+  }
+`;
+
+export const Item = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+`
+
+export const Border = styled.div`
+  background-color: #e7edff;
+  border-radius: 20px;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 802px) and (max-width: 1150px) {
+    display: none;
   }
 
-  .container-insert {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding-top: 100px;
-    width: 50%;
-    margin: auto;
+  @media (max-width: 801px) {
+    display: none;
+  }
+`;
 
-    .list {
-      width: 100%;
-      display: flex;
-      gap: 100px;
+export const UlList = styled.ul`
+  width: 100%;
+  display: flex;
+  gap: 100px;
 
-      a {
-        color: #718ebf;
-      }
-    }
-
-    .card {
-      width: 45%;
-    }
+  li {
+    position: relative;
+    list-style-type: none;
   }
 
-  @media (min-width: 802px) and (max-width: 1150px){
-    .container-config, .border, .container-texts, .container-options{
-        display: none;
-    }
-
-    .container-infos {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .container-insert{
-        width: 80%;
-    }
+  li::before,
+  li::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2.8px;
+    bottom: calc(-1.2rem);
+    background-color: blue;
   }
 
-  @media (max-width: 801px){
-    .container-config, .border, .container-texts, .container-options{
-        display: none;
-    }
+  li::before,
+  li.active::before {
+    transition: 0.5s;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
 
-    .container-infos {
-        width: 100%;
-        justify-content: center;
-    }
+  li::after,
+  li.active::after {
+    transform: scaleX(0);
+  }
 
-    .container-insert{
-        width: 80%;
-    }
+  li.active::before,
+  li.active::after {
+    transform: scaleX(1.2);
+  }
+
+  @media (max-width: 801px) {
+    gap: 70px;
+  }
+`;
+
+export const AList = styled.a`
+  color: #718ebf;
+  cursor: pointer;
+`
+
+export const ContainerInsert = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 100px;
+  width: 50%;
+  margin: auto;
+
+  .blue {
+    color: blue;
+    cursor: pointer;
+  }
+
+  @media (min-width: 802px) and (max-width: 1150px) {
+    width: 80%;
+  }
+
+  @media (max-width: 801px) {
+    width: 80%;
+  }
+`;
+
+export const Card = styled.div`
+  width: 45%;
+
+  @media (min-width: 802px) and (max-width: 1150px) {
+    width: 100%;
+  }
+
+  @media (max-width: 801px) {
+    width: 100%;
   }
 `;
 
@@ -142,4 +207,5 @@ export const Button = styled.button`
   border-radius: 9px;
   width: 160px;
   height: 50px;
+  cursor: pointer;
 `;
