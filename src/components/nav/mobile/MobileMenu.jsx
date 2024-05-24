@@ -22,13 +22,10 @@ export default function MobileMenu() {
     setMainHeadingZIndexBasedOnState(menuVisible);
 
     const handleResize = () => {
-        if(window.innerWidth > 1150 && menuVisible)
-            setMenuVisible(false);
+      if (window.innerWidth > 1150 && menuVisible) setMenuVisible(false);
     };
 
     window.addEventListener("resize", handleResize);
-
-   
   }, [menuVisible]);
 
   return (
@@ -52,49 +49,51 @@ export default function MobileMenu() {
       )}
 
       <div className={`interior-menumobile ${menuVisible ? "visible" : ""}`}>
-        <div className="item">
-          <div className="border">
-            <img src={LogoutPng} alt="Sair da Conta" />
+        <div className="container-items">
+          <div className="item">
+            <div className="border">
+              <img src={LogoutPng} alt="Sair da Conta" />
+            </div>
+            <div className="text">
+              <h3>Log out</h3>
+              <p>Saia da sua conta</p>
+            </div>
           </div>
-          <div className="text">
-            <h3>Log out</h3>
-            <p>Saia da sua conta</p>
+          <div className="item">
+            <div className="border">
+              <img src={TrashPng} alt="Excluir" />
+            </div>
+            <div>
+              <h3>Excluir gêneros</h3>
+              <p>Exclua gêneros de livros</p>
+            </div>
           </div>
-        </div>
-        <div className="item">
-          <div className="border">
-            <img src={TrashPng} alt="Excluir" />
+          <div className="item">
+            <div className="border">
+              <img src={TrashPng} alt="Excluir" />
+            </div>
+            <div>
+              <h3>Excluir autores</h3>
+              <p>Exclua autores de livros</p>
+            </div>
           </div>
-          <div>
-            <h3>Excluir gêneros</h3>
-            <p>Exclua gêneros de livros</p>
+          <div className="item">
+            <div className="border">
+              <img src={TrashPng} alt="Excluir" />
+            </div>
+            <div>
+              <h3>Excluir editoras</h3>
+              <p>Exclua editoras de livros</p>
+            </div>
           </div>
-        </div>
-        <div className="item">
-          <div className="border">
-            <img src={TrashPng} alt="Excluir" />
-          </div>
-          <div>
-            <h3>Excluir autores</h3>
-            <p>Exclua autores de livros</p>
-          </div>
-        </div>
-        <div className="item">
-          <div className="border">
-            <img src={TrashPng} alt="Excluir" />
-          </div>
-          <div>
-            <h3>Excluir editoras</h3>
-            <p>Exclua editoras de livros</p>
-          </div>
-        </div>
-        <div className="item">
-          <div className="border">
-            <img src={TrashPng} alt="Excluir" />
-          </div>
-          <div>
-            <h3>Excluir livros</h3>
-            <p>Exclua todo um livro</p>
+          <div className="item">
+            <div className="border">
+              <img src={TrashPng} alt="Excluir" />
+            </div>
+            <div>
+              <h3>Excluir livros</h3>
+              <p>Exclua todo um livro</p>
+            </div>
           </div>
         </div>
       </div>

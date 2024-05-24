@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.section`
   .interior-menumobile,
   .container-texts,
-  #burger, #close {
+  #burger,
+  #close {
     display: none;
   }
 
@@ -11,7 +12,8 @@ export const Container = styled.section`
     display: flex;
     flex-direction: column;
 
-    #burger, #close {
+    #burger,
+    #close {
       display: flex;
       cursor: pointer;
       z-index: 1001; /* Para garantir que o botão esteja acima do menu */
@@ -19,6 +21,7 @@ export const Container = styled.section`
 
     .interior-menumobile.visible,
     .container-texts.visible {
+      min-height: 100vh;
       padding: 30px;
       display: flex;
       flex-direction: column;
@@ -32,11 +35,19 @@ export const Container = styled.section`
       z-index: 1000; /* Altere este valor conforme necessário */
     }
 
-    .item{
-        width: 50%;
-        display: flex;
-        gap: 20px;
-        align-items: center;   
+    .container-items {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 50px;
+    }
+
+    .item {
+      width: 50%;
+      display: flex;
+      gap: 20px;
+      align-items: center;
     }
 
     .border {
@@ -55,11 +66,12 @@ export const Container = styled.section`
     }
   }
 
-@media (max-width: 801px){
+  @media (max-width: 801px) {
     display: flex;
     flex-direction: column;
 
-    #burger, #close {
+    #burger,
+    #close {
       display: flex;
       cursor: pointer;
       z-index: 1001; /* Para garantir que o botão esteja acima do menu */
@@ -67,6 +79,7 @@ export const Container = styled.section`
 
     .interior-menumobile.visible,
     .container-texts.visible {
+      min-height: 100vh;
       padding: 30px;
       display: flex;
       flex-direction: column;
@@ -80,15 +93,22 @@ export const Container = styled.section`
       z-index: 1000; /* Altere este valor conforme necessário */
     }
 
-    .item{
-        width: 50%;
-        display: flex;
-        gap: 20px;
-        align-items: center;   
+    .container-items {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
-    .border{
-        display: none;
+    .item {
+      width: 30%;
+      display: flex;
+      gap: 20px;
+      align-items: center;
     }
-}
+
+    .border {
+      display: none;
+    }
+  }
 `;
