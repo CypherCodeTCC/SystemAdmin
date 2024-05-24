@@ -193,6 +193,10 @@ export const Card = styled.div`
   }
 `;
 
+export const CardPublishing = styled.div`
+  width: 100%;
+`
+
 export const Input = styled.input`
   width: 100%;
   border-radius: 15px;

@@ -5,35 +5,38 @@ import {
   AList,
   AOptions,
   Border,
-  Button,
-  Card,
   Container,
   ContainerConfig,
   ContainerInsert,
   ContainerOptions,
   Containerinfos,
-  Input,
   Item,
   LiOptions,
   ListOptions,
   UlList,
 } from "./panelStyle";
+import Forms from "./Forms";
 
 export default function Panel() {
-  const [optionColor, setOptionColor] = useState(null);
-  const [insertColor, setInsertColor] = useState(null);
-  const [isActive, setIsActive] = useState(null);
+  const [optionColor, setOptionColor] = useState(1);
+  const [insertColor, setInsertColor] = useState(1);
+  const [isActive, setIsActive] = useState(1);
+  const [selectedForm, setSelectedForm] = useState(1);
 
+  //ALTERA A COR DA LETRA DAS OPÇÕES
   const changeOptionColor = (id) => {
-    setOptionColor(id === optionColor ? null : id);
+    setOptionColor(id === optionColor ? id : id);
   };
 
+  //ALTERA A ANIMAÇÃO DAS OPÇÕES DA LISTA DO FORMULARIO
   const changeAnimation = (id) => {
-    setIsActive(id === isActive ? null : id);
+    setIsActive(id === isActive ? id : id);
   };
 
+  //ALTERA A COR DA LETRA DAS OPÇÕES DA LISTA DO FORMULARIO
   const changeColorInsert = (id) => {
     setInsertColor(id === insertColor ? id : id);
+    setSelectedForm(id);
   };
 
   return (
@@ -156,24 +159,7 @@ export default function Panel() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit Pellentesque
             et mi nec neque fermentum vehicula.
           </h2>
-
-          <Card>
-            <h3>Nome do autor</h3>
-            <Input type="text" placeholder="Apenas letras" />
-          </Card>
-          <Card>
-            <h3>Descrição</h3>
-            <Input type="text" placeholder="Apenas letras" />
-          </Card>
-          <Card>
-            <h3>Título do livro</h3>
-            <Input type="text" placeholder="Apenas letras" />
-          </Card>
-          <Card>
-            <h3>Editora</h3>
-            <Input type="text" placeholder="Apenas letras" />
-          </Card>
-          <Button>Adicionar</Button>
+          <Forms selectedForm={selectedForm}/>
         </ContainerInsert>
       </Container>
     </>
