@@ -1,46 +1,40 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-    min-height: 89vh;
-    padding: 30px;
-    gap: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
+  min-height: 89vh;
+  padding: 30px;
+  gap: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+`;
 
-    background-image: url("../../../public/library.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+export const ContainerForm = styled.div`
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  gap: 20px;
 
-    .container-form{
-        display: flex;
-        width: 30%;
-        flex-direction: column;
-        gap: 20px;
-        
-        input{
-            border-radius: 8px;
-            border: 1px solid;
-            padding: 10px;
-        }
+  @media (max-width: 767px) {
+    width: 60%;
+  }
+`;
 
-        p{
-            padding-bottom: 20px;
-        }
+export const SubTitle = styled.p`
+  padding-bottom: 20px;
+`;
 
-        .btn-login{
-            background-color: #6236F5;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-}
+export const Input = styled.input`
+  border-radius: 8px;
+  border: 1px solid ${(props) => (props.hasError ? "red" : "black")};
+  padding: 10px;
+`;
 
-@media (max-width: 801px){
-    .container-form{
-        width: 60%;
-    }
-}
+export const Button = styled.button`
+  background-color: #6236f5;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
 `;

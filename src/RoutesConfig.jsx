@@ -1,29 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import NavBar from "./components/nav/NavBar";
 import Footer from "./components/footer/Footer";
+import Login from "./routes/loginSec/Login";
 import Panel from "./routes/panelSec/Panel";
-
-const Layout = ({ children }) => (
-    <div>
-      <NavBar />
-      <div>{children}</div>
-      <Footer />
-    </div>
-  );
+import Error from "./routes/error/Error";
+import "react-toastify/dist/ReactToastify.css"; 
 
 export default function RoutesConfig() {
-    return (
+  return (
     <BrowserRouter>
+      <NavBar />
+      <ToastContainer />
       <Routes>
-        <Route
-          path="/testeAmbiente"
-          element={
-            <Layout>
-              <Panel />
-            </Layout>
-          }
-        />
+        <Route path="/" element={<Login />} />
+        <Route path="/panel" element={<Panel />} />
+        <Route path="*" element={<Error/>} />
       </Routes>
+      <Footer />
     </BrowserRouter>
-    );
+  );
 }

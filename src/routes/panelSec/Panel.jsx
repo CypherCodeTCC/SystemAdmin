@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogoutPng from "../../../public/logout.png";
 import TrashPng from "../../../public/trash.png";
 import {
@@ -16,8 +16,26 @@ import {
   UlList,
 } from "./panelStyle";
 import Forms from "./Forms";
+import { useNavigate } from "react-router-dom";
 
 export default function Panel() {
+  const navigate = useNavigate();
+
+  /*
+    CONTROLE DE ACESSO, PARA QUE NÃO SEJA POSSÍVEL ACESSAR A ROTA SEM ESTAR LOGADO
+  */
+  useEffect(() => {
+    const checkUser = () => {
+      const admin = localStorage.getItem('admin');
+      if(!admin){
+        setTimeout(() => {
+          navigate('/')
+        }, 0);
+      }     
+    }
+    checkUser();
+  }, [navigate]);
+
   const [optionColor, setOptionColor] = useState(1);
   const [insertColor, setInsertColor] = useState(1);
   const [isActive, setIsActive] = useState(1);
