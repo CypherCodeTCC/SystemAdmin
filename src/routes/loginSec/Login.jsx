@@ -36,7 +36,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8081/admin/login", admin);
+      const res = await axios.post("https://node-routes-mysql.vercel.app/admin/login", admin);
       if (res.data.message == "Login Successful") {
         localStorage.setItem("admin", JSON.stringify(admin.email));
         navigate("/panel");
