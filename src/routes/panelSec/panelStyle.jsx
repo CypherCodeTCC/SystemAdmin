@@ -183,6 +183,8 @@ export const ContainerInsert = styled.div`
 
 export const Card = styled.div`
   width: 45%;
+  flex-grow: 1;
+
 
   @media (min-width: 802px) and (max-width: 1150px) {
     width: 100%;
@@ -204,12 +206,12 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+  width: 100%;
   font-size: 18px;
   background-color: #1814f3;
   color: white;
   padding: 10px;
   border-radius: 9px;
-  width: 160px;
   height: 50px;
   cursor: pointer;
 `;
