@@ -55,7 +55,8 @@ export default function Forms({ selectedForm }) {
 
     try {
       if (selectedForm === 1) {
-        const publishingResponse = await axios.get("http://localhost:8081/publishingcompany");
+
+        const publishingResponse = await axios.get("https://node-routes-mysql.vercel.app/publishingcompany");
         const publishingCompanies = publishingResponse.data;
         const publishingCompany = publishingCompanies.find(
           (company) => company.name.toLowerCase() === formData.book.publishingCompany.toLowerCase()
@@ -67,7 +68,7 @@ export default function Forms({ selectedForm }) {
         }
         dataToSubmit.id_publishing_company = publishingCompany.id;
 
-        const authorResponse = await axios.get("http://localhost:8081/author");
+        const authorResponse = await axios.get("https://node-routes-mysql.vercel.app/author");
         const authors = authorResponse.data;
         const author = authors.find(
           (author) => author.name.toLowerCase() === formData.book.author.toLowerCase()
@@ -79,7 +80,7 @@ export default function Forms({ selectedForm }) {
         }
         dataToSubmit.id_author = author.id
 
-        const genreResponse = await axios.get("http://localhost:8081/genre");
+        const genreResponse = await axios.get("https://node-routes-mysql.vercel.app/genre");
         const genres = genreResponse.data;
         const genre = genres.find(
           (genre) => genre.name.toLowerCase() === formData.book.genre.toLowerCase()
@@ -96,22 +97,16 @@ export default function Forms({ selectedForm }) {
         delete dataToSubmit.genre;
 
         const formDataToSend = new FormData();
-        formDataToSend.append("name", formData.book.name);
-        formDataToSend.append("synopsis", formData.book.synopsis);
-        formDataToSend.append("price", formData.book.price);
-        formDataToSend.append("qtd", formData.book.qtd);
-        formDataToSend.append("id_publishing_company", formData.book.id_publishing_company);
-        formDataToSend.append("id_author", formData.book.id_author);
-        formDataToSend.append("id_genre", formData.book.id_genre);
         formDataToSend.append("image", formData.book.image);
 
-        const url = "http://localhost:8081/book";
+        const imageResponse = await axios.post("https://node-routes-mysql.vercel.app/book/images", formDataToSend);
 
-        await axios.post(url, formDataToSend, {
-          headers: {
-            "Content-type": "multpart/form-data",
-          },
-        });
+        delete dataToSubmit.image;
+        dataToSubmit.name_image = imageResponse.data;
+
+        const url = "https://node-routes-mysql.vercel.app/book";
+
+        await axios.post(url, dataToSubmit);
 
         alert("Livro cadastrado com sucesso!");
         window.location.reload();
@@ -119,8 +114,8 @@ export default function Forms({ selectedForm }) {
 
       const url =
         selectedForm === 2
-          ? "http://localhost:8081/genre"
-          : "http://localhost:8081/publishingcompany";
+          ? "https://node-routes-mysql.vercel.app/genre"
+          : "https://node-routes-mysql.vercel.app/publishingcompany";
 
       await axios.post(url, dataToSubmit);
 
@@ -169,7 +164,7 @@ export default function Forms({ selectedForm }) {
             </Card>
             <Card>
               <h3>Imagem</h3>
-              <Input type="file" placeholder="Apenas letras" onChange={handleFileChange} name="image" value={formData.book.image} />
+              <Input type="file" onChange={handleFileChange} name="image" />
             </Card>
             <Button onClick={handleSubmit}>Adicionar</Button>
           </>
