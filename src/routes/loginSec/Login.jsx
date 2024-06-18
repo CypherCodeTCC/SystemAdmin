@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Button, Container, ContainerForm, Input, SubTitle } from "./loginStyle";
+import {
+  Button,
+  Container,
+  ContainerForm,
+  Input,
+  SubTitle,
+} from "./loginStyle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -36,10 +42,16 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://node-routes-mysql.vercel.app/admin/login", admin);
+      const res = await axios.post(
+        "https://node-routes-mysql.vercel.app/admin/login",
+        admin
+      );
       if (res.data.message == "Login Successful") {
         localStorage.setItem("admin", JSON.stringify(admin.email));
         navigate("/panel");
+        toast.success("Login efetuado com sucesso.", {
+          closeOnClick: true,
+        });
       } else {
         setLoginError(true);
         toast.error("Email ou senha inválidos.", {
@@ -79,9 +91,7 @@ export default function Login() {
             onChange={handleChanged}
             hasError={loginError}
           />
-          <Button onClick={handleSubmit}>
-            Login
-          </Button>
+          <Button onClick={handleSubmit}>Login</Button>
         </ContainerForm>
       </Container>
     </>

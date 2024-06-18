@@ -46,15 +46,15 @@ export const ListOptions = styled.ul`
 
 export const LiOptions = styled.li`
   list-style-type: none;
-`
+`;
 
 export const AOptions = styled.a`
-    color: #b1b1b1;
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-`
+  color: #b1b1b1;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+`;
 
 export const Containerinfos = styled.div`
   display: flex;
@@ -92,7 +92,8 @@ export const Item = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-`
+  cursor: pointer;
+`;
 
 export const Border = styled.div`
   background-color: #e7edff;
@@ -157,7 +158,7 @@ export const UlList = styled.ul`
 export const AList = styled.a`
   color: #718ebf;
   cursor: pointer;
-`
+`;
 
 export const ContainerInsert = styled.div`
   display: flex;
@@ -185,7 +186,6 @@ export const Card = styled.div`
   width: 45%;
   flex-grow: 1;
 
-
   @media (min-width: 802px) and (max-width: 1150px) {
     width: 100%;
   }
@@ -197,7 +197,7 @@ export const Card = styled.div`
 
 export const CardPublishing = styled.div`
   width: 100%;
-`
+`;
 
 export const Input = styled.input`
   width: 100%;

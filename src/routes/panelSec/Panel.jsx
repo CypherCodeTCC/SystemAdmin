@@ -17,6 +17,7 @@ import {
 } from "./panelStyle";
 import Forms from "./Forms";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Panel() {
   const navigate = useNavigate();
@@ -26,13 +27,13 @@ export default function Panel() {
   */
   useEffect(() => {
     const checkUser = () => {
-      const admin = localStorage.getItem('admin');
-      if(!admin){
+      const admin = localStorage.getItem("admin");
+      if (!admin) {
         setTimeout(() => {
-          navigate('/')
+          navigate("/");
         }, 0);
-      }     
-    }
+      }
+    };
     checkUser();
   }, [navigate]);
 
@@ -55,6 +56,15 @@ export default function Panel() {
   const changeColorInsert = (id) => {
     setInsertColor(id === insertColor ? id : id);
     setSelectedForm(id);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("admin");
+    navigate("/");
+
+    toast.info("Você deslogou do sistema.", {
+      closeOnClick: true,
+    });
   };
 
   return (
@@ -90,7 +100,7 @@ export default function Panel() {
           <p>Modificar</p>
         </Containerinfos>
         <ContainerConfig>
-          <Item>
+          <Item onClick={handleLogout}>
             <Border>
               <img src={LogoutPng} alt="Sair da Conta" />
             </Border>
@@ -177,7 +187,7 @@ export default function Panel() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit Pellentesque
             et mi nec neque fermentum vehicula.
           </h2>
-          <Forms selectedForm={selectedForm}/>
+          <Forms selectedForm={selectedForm} />
         </ContainerInsert>
       </Container>
     </>
