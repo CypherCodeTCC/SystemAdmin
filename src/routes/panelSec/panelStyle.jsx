@@ -7,6 +7,7 @@ export const Container = styled.section`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: space-between;
 
   font-family: "Inter", Arial, Helvetica, sans-serif;
 
@@ -56,12 +57,9 @@ export const AOptions = styled.a`
   cursor: pointer;
 `;
 
-export const Containerinfos = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  height: max-content;
+export const Containerinfos = styled.table`
   width: 60%;
+  margin-top: 20px;
 
   @media (min-width: 802px) and (max-width: 1150px) {
     width: 100%;
@@ -71,6 +69,42 @@ export const Containerinfos = styled.div`
   @media (max-width: 801px) {
     width: 100%;
     justify-content: center;
+  }
+`;
+
+export const Td = styled.td`
+   padding: 12px;
+`
+
+export const Th = styled.th`
+  color: #718ebf;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+`;
+
+export const Tr = styled.tr`
+  color: #232323;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  text-align: center;
+`;
+
+export const ButtonTable = styled.button`
+  width: 100px;
+  height: 35px;
+  border: 1px solid #1814f3;
+  border-radius: 50px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1814f3;
+  cursor: pointer;
+
+  &&:hover{
+    background-color: #1814f3;
+    color: white;
+    transition: 0.5s;
+    border: 1px solid black;
   }
 `;
 

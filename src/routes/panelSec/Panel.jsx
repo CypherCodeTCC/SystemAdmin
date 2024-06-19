@@ -5,6 +5,7 @@ import {
   AList,
   AOptions,
   Border,
+  ButtonTable,
   Container,
   ContainerConfig,
   ContainerInsert,
@@ -13,11 +14,15 @@ import {
   Item,
   LiOptions,
   ListOptions,
+  Td,
+  Th,
+  Tr,
   UlList,
 } from "./panelStyle";
 import Forms from "./Forms";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function Panel() {
   const navigate = useNavigate();
@@ -37,10 +42,25 @@ export default function Panel() {
     checkUser();
   }, [navigate]);
 
+  const [books, setBooks] = useState([]);
   const [optionColor, setOptionColor] = useState(1);
   const [insertColor, setInsertColor] = useState(1);
   const [isActive, setIsActive] = useState(1);
   const [selectedForm, setSelectedForm] = useState(1);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8081/book/admin/books"
+        );
+        setBooks(response.data);
+      } catch (err) {
+        console.log("Erro ao trazer os livros.", err);
+      }
+    };
+    fetchBooks();
+  }, []);
 
   //ALTERA A COR DA LETRA DAS OPÇÕES
   const changeOptionColor = (id) => {
@@ -91,13 +111,32 @@ export default function Panel() {
           </ListOptions>
         </ContainerOptions>
         <Containerinfos>
-          <p>Id</p>
-          <p>Preço</p>
-          <p>Editora</p>
-          <p>Autor</p>
-          <p>Gênero</p>
-          <p>Avaliação</p>
-          <p>Modificar</p>
+          <thead>
+            <tr>
+              <Th>Id</Th>
+              <Th>Preço</Th>
+              <Th>Editora</Th>
+              <Th>Autor</Th>
+              <Th>Gênero</Th>
+              <Th>Avaliação</Th>
+              <Th>Modificar</Th>
+            </tr>
+          </thead>
+          <tbody>
+            {books.map((book) => (
+              <Tr className="books" key={book.Id}>
+                <Td>{book.Id}</Td>
+                <Td>R${book.Preco}</Td>
+                <Td>{book.Editora}</Td>
+                <Td>{book.Autor}</Td>
+                <Td>{book.Genero}</Td>
+                <Td>5.0</Td>
+                <Td>
+                  <ButtonTable>Modificar</ButtonTable>
+                </Td>
+              </Tr>
+            ))}
+          </tbody>
         </Containerinfos>
         <ContainerConfig>
           <Item onClick={handleLogout}>
