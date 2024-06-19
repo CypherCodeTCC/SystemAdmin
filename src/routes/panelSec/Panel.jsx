@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
 import LogoutPng from "../../../public/logout.png";
 import TrashPng from "../../../public/trash.png";
+import UserPng from "../../../public/userProfile.png";
+import EditPng from "../../../public/edit.png";
 import {
   AList,
   AOptions,
   Border,
+  ButtonProfile,
   ButtonTable,
   Container,
+  ContainerButtonProfile,
   ContainerConfig,
   ContainerInsert,
   ContainerOptions,
+  ContainerPng,
+  ContainerProfile,
   Containerinfos,
+  Fields,
+  Infos,
+  InputProfile,
   Item,
   LiOptions,
   ListOptions,
+  Profile,
   Td,
   Th,
   Tr,
@@ -23,6 +33,7 @@ import Forms from "./Forms";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function Panel() {
   const navigate = useNavigate();
@@ -42,6 +53,7 @@ export default function Panel() {
     checkUser();
   }, [navigate]);
 
+  const width = useWindowWidth();
   const [books, setBooks] = useState([]);
   const [optionColor, setOptionColor] = useState(1);
   const [insertColor, setInsertColor] = useState(1);
@@ -87,6 +99,189 @@ export default function Panel() {
     });
   };
 
+  const renderForm = () => {
+    switch (optionColor) {
+      case 1:
+        return (
+          <>
+            <Containerinfos>
+              <thead>
+                <tr>
+                  <Th>Id</Th>
+                  <Th>Preço</Th>
+                  <Th>Editora</Th>
+                  <Th>Autor</Th>
+                  <Th>Gênero</Th>
+                  <Th>Avaliação</Th>
+                  <Th>Modificar</Th>
+                </tr>
+              </thead>
+              <tbody>
+                {books.map((book) => (
+                  <Tr className="books" key={book.Id}>
+                    <Td>{book.Id}</Td>
+                    <Td>R${book.Preco}</Td>
+                    <Td>{book.Editora}</Td>
+                    <Td>{book.Autor}</Td>
+                    <Td>{book.Genero}</Td>
+                    <Td>5.0</Td>
+                    <Td>
+                      <ButtonTable>Modificar</ButtonTable>
+                    </Td>
+                  </Tr>
+                ))}
+              </tbody>
+            </Containerinfos>
+            <ContainerConfig>
+              <Item onClick={handleLogout}>
+                <Border>
+                  <img src={LogoutPng} alt="Sair da Conta" />
+                </Border>
+                <div className="text">
+                  <h3>Log out</h3>
+                  <p>Saia da sua conta</p>
+                </div>
+              </Item>
+              <Item>
+                <Border>
+                  <img src={TrashPng} alt="Excluir" />
+                </Border>
+                <div>
+                  <h3>Excluir gêneros</h3>
+                  <p>Exclua gêneros de livros</p>
+                </div>
+              </Item>
+              <Item>
+                <Border>
+                  <img src={TrashPng} alt="Excluir" />
+                </Border>
+                <div>
+                  <h3>Excluir autores</h3>
+                  <p>Exclua autores de livros</p>
+                </div>
+              </Item>
+              <Item>
+                <Border>
+                  <img src={TrashPng} alt="Excluir" />
+                </Border>
+                <div>
+                  <h3>Excluir editoras</h3>
+                  <p>Exclua editoras de livros</p>
+                </div>
+              </Item>
+              <Item>
+                <Border>
+                  <img src={TrashPng} alt="Excluir" />
+                </Border>
+                <div>
+                  <h3>Excluir livros</h3>
+                  <p>Exclua todo um livro</p>
+                </div>
+              </Item>
+            </ContainerConfig>
+            <ContainerInsert>
+              <h1>Adicionar</h1>
+              <UlList>
+                <li
+                  onClick={() => changeAnimation(1)}
+                  className={isActive === 1 ? "active" : ""}
+                >
+                  <AList
+                    onClick={() => changeColorInsert(1)}
+                    className={insertColor === 1 ? "blue" : ""}
+                  >
+                    Livros
+                  </AList>
+                </li>
+                <li
+                  onClick={() => changeAnimation(2)}
+                  className={isActive === 2 ? "active" : ""}
+                >
+                  <AList
+                    onClick={() => changeColorInsert(2)}
+                    className={insertColor === 2 ? "blue" : ""}
+                  >
+                    Gêneros
+                  </AList>
+                </li>
+                <li
+                  onClick={() => changeAnimation(3)}
+                  className={isActive === 3 ? "active" : ""}
+                >
+                  <AList
+                    onClick={() => changeColorInsert(3)}
+                    className={insertColor === 3 ? "blue" : ""}
+                  >
+                    Editoras
+                  </AList>
+                </li>
+              </UlList>
+              <h2>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                Pellentesque et mi nec neque fermentum vehicula.
+              </h2>
+              <Forms selectedForm={selectedForm} />
+            </ContainerInsert>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <ContainerProfile>
+              <UlList>
+                <li
+                  onClick={() => changeAnimation(1)}
+                  className={isActive === 1 ? "active" : ""}
+                >
+                  <AList
+                    onClick={() => changeColorInsert(1)}
+                    className={insertColor === 1 ? "blue" : ""}
+                  >
+                    Perfil
+                  </AList>
+                </li>
+              </UlList>
+              <Fields>
+                <ContainerPng>
+                  <img src={UserPng} alt="" />
+                  <img src={EditPng} alt="" className="edit" />
+                </ContainerPng>
+                <Profile>
+                  <Infos>
+                    <p>Primeiro Nome:</p>
+                    <InputProfile type="text" placeholder="Juan" />
+                  </Infos>
+                  <Infos>
+                    <p>Sobrenome</p>
+                    <InputProfile type="text" name="" placeholder="Pablo" />
+                  </Infos>
+                  <Infos>
+                    <p>Email</p>
+                    <InputProfile
+                      type="text"
+                      name=""
+                      placeholder="juan@feitosa.com"
+                    />
+                  </Infos>
+                  <Infos>
+                    <p>Senha</p>
+                    <InputProfile type="password" />
+                  </Infos>
+                </Profile>
+              </Fields>
+              <ContainerButtonProfile>
+                {width < 768 ? (
+                  <ButtonProfile>Salvar</ButtonProfile>
+                ) : (
+                  <ButtonProfile>Salvar Alterações</ButtonProfile>
+                )}
+              </ContainerButtonProfile>
+            </ContainerProfile>
+          </>
+        );
+    }
+  };
+
   return (
     <>
       <Container>
@@ -110,124 +305,7 @@ export default function Panel() {
             </LiOptions>
           </ListOptions>
         </ContainerOptions>
-        <Containerinfos>
-          <thead>
-            <tr>
-              <Th>Id</Th>
-              <Th>Preço</Th>
-              <Th>Editora</Th>
-              <Th>Autor</Th>
-              <Th>Gênero</Th>
-              <Th>Avaliação</Th>
-              <Th>Modificar</Th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book) => (
-              <Tr className="books" key={book.Id}>
-                <Td>{book.Id}</Td>
-                <Td>R${book.Preco}</Td>
-                <Td>{book.Editora}</Td>
-                <Td>{book.Autor}</Td>
-                <Td>{book.Genero}</Td>
-                <Td>5.0</Td>
-                <Td>
-                  <ButtonTable>Modificar</ButtonTable>
-                </Td>
-              </Tr>
-            ))}
-          </tbody>
-        </Containerinfos>
-        <ContainerConfig>
-          <Item onClick={handleLogout}>
-            <Border>
-              <img src={LogoutPng} alt="Sair da Conta" />
-            </Border>
-            <div className="text">
-              <h3>Log out</h3>
-              <p>Saia da sua conta</p>
-            </div>
-          </Item>
-          <Item>
-            <Border>
-              <img src={TrashPng} alt="Excluir" />
-            </Border>
-            <div>
-              <h3>Excluir gêneros</h3>
-              <p>Exclua gêneros de livros</p>
-            </div>
-          </Item>
-          <Item>
-            <Border>
-              <img src={TrashPng} alt="Excluir" />
-            </Border>
-            <div>
-              <h3>Excluir autores</h3>
-              <p>Exclua autores de livros</p>
-            </div>
-          </Item>
-          <Item>
-            <Border>
-              <img src={TrashPng} alt="Excluir" />
-            </Border>
-            <div>
-              <h3>Excluir editoras</h3>
-              <p>Exclua editoras de livros</p>
-            </div>
-          </Item>
-          <Item>
-            <Border>
-              <img src={TrashPng} alt="Excluir" />
-            </Border>
-            <div>
-              <h3>Excluir livros</h3>
-              <p>Exclua todo um livro</p>
-            </div>
-          </Item>
-        </ContainerConfig>
-        <ContainerInsert>
-          <h1>Adicionar</h1>
-          <UlList>
-            <li
-              onClick={() => changeAnimation(1)}
-              className={isActive === 1 ? "active" : ""}
-            >
-              <AList
-                onClick={() => changeColorInsert(1)}
-                className={insertColor === 1 ? "blue" : ""}
-              >
-                Livros
-              </AList>
-            </li>
-            <li
-              onClick={() => changeAnimation(2)}
-              className={isActive === 2 ? "active" : ""}
-            >
-              <AList
-                onClick={() => changeColorInsert(2)}
-                className={insertColor === 2 ? "blue" : ""}
-              >
-                Gêneros
-              </AList>
-            </li>
-            <li
-              onClick={() => changeAnimation(3)}
-              className={isActive === 3 ? "active" : ""}
-            >
-              <AList
-                onClick={() => changeColorInsert(3)}
-                className={insertColor === 3 ? "blue" : ""}
-              >
-                Editoras
-              </AList>
-            </li>
-          </UlList>
-          <h2>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit Pellentesque
-            et mi nec neque fermentum vehicula.
-          </h2>
-          <Forms selectedForm={selectedForm} />
-        </ContainerInsert>
+        {renderForm()}
       </Container>
     </>
   );
