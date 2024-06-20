@@ -40,12 +40,12 @@ export default function Author() {
     navigate("/panel", { state: { optionColor: id } });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm(`Deseja excluir o autor?`);
 
     if (confirmDelete) {
       try {
-        axios.delete(`https://node-routes-mysql.vercel.app/author/${id}`);
+        await axios.delete(`https://node-routes-mysql.vercel.app/author/${id}`);
         toast.info("Autor deletado com sucesso.", {
           closeOnClick: true,
         });

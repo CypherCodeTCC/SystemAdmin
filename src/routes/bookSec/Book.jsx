@@ -37,12 +37,12 @@ export default function Book() {
     navigate("/panel", { state: { optionColor: id } });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Deseja excluir o livro?");
 
     if (confirmDelete) {
       try {
-        axios.delete(`https://node-routes-mysql.vercel.app/book/${id}`);
+        await axios.delete(`https://node-routes-mysql.vercel.app/book/${id}`);
         toast.info("Livro excluido com sucesso.", {
           closeOnClick: true,
         });
