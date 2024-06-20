@@ -12,6 +12,7 @@ import { Options } from "../registerSec/registerStyle";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ButtonDelete, Container } from "./bookStyle";
+import { toast } from "react-toastify";
 
 export default function Book() {
   const navigate = useNavigate();
@@ -34,6 +35,26 @@ export default function Book() {
   const changeOptionColor = (id) => {
     setOptionColor(id === optionColor ? id : id);
     navigate("/panel", { state: { optionColor: id } });
+  };
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Deseja excluir o livro?");
+
+    if (confirmDelete) {
+      try {
+        axios.delete(`https://node-routes-mysql.vercel.app/book/${id}`);
+        toast.info("Livro excluido com sucesso.", {
+          closeOnClick: true,
+        });
+        window.location.reload();
+      } catch (err) {
+        toast.error("Erro ao excluir o livro. Tente novamente mais tarde.", {
+          closeOnClick: true,
+        });
+        console.log("Erro ao excluir o livro.", err);
+      }
+    } else {
+    }
   };
 
   return (
@@ -79,7 +100,9 @@ export default function Book() {
                 <Td>{book.Genero}</Td>
                 <Td>5.0</Td>
                 <Td>
-                  <ButtonDelete>Apagar</ButtonDelete>
+                  <ButtonDelete onClick={() => handleDelete(book.Id)}>
+                    Apagar
+                  </ButtonDelete>
                 </Td>
               </Tr>
             ))}

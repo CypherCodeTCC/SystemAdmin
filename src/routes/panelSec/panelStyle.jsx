@@ -59,6 +59,7 @@ export const AOptions = styled.a`
 
 export const Containerinfos = styled.table`
   width: 60%;
+  height: max-content;
   margin-top: 20px;
 
   @media (min-width: 768px) and (max-width: 1024px) {

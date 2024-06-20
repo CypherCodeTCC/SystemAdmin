@@ -13,6 +13,7 @@ import {
 import { Options } from "../registerSec/registerStyle";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Author() {
   const navigate = useNavigate();
@@ -37,6 +38,22 @@ export default function Author() {
   const changeOptionColor = (id) => {
     setOptionColor(id === optionColor ? id : id);
     navigate("/panel", { state: { optionColor: id } });
+  };
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(`Deseja excluir o autor?`);
+
+    if (confirmDelete) {
+      try {
+        axios.delete(`https://node-routes-mysql.vercel.app/author/${id}`);
+        toast.info("Autor deletado com sucesso.", {
+          closeOnClick: true,
+        });
+        window.location.reload();
+      } catch (err) {
+        console.log("Erro ao deletar o autor.", err);
+      }
+    }
   };
 
   return (
@@ -78,7 +95,9 @@ export default function Author() {
                   <ButtonTable>Modificar</ButtonTable>
                 </Td>
                 <Td>
-                  <ButtonDelete>Apagar</ButtonDelete>
+                  <ButtonDelete onClick={() => handleDelete(author.id)}>
+                    Apagar
+                  </ButtonDelete>
                 </Td>
               </Tr>
             ))}
