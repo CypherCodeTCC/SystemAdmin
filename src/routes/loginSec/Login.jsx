@@ -47,7 +47,7 @@ export default function Login() {
         admin
       );
       if (res.data.message == "Login Successful") {
-        localStorage.setItem("admin", JSON.stringify(admin.email));
+        localStorage.setItem("admin", JSON.stringify(res.data.user.Id));
         navigate("/panel");
         toast.success("Login efetuado com sucesso.", {
           closeOnClick: true,

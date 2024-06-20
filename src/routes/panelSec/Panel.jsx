@@ -3,6 +3,7 @@ import LogoutPng from "../../../public/logout.png";
 import TrashPng from "../../../public/trash.png";
 import UserPng from "../../../public/userProfile.png";
 import EditPng from "../../../public/edit.png";
+import PlusPng from "../../../public/plus.png";
 import {
   AList,
   AOptions,
@@ -60,11 +61,19 @@ export default function Panel() {
   const [isActive, setIsActive] = useState(1);
   const [selectedForm, setSelectedForm] = useState(1);
 
+  const [admin, setAdmin] = useState({
+    Nome: "",
+    Email: "",
+    Telefone: "",
+  });
+
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8081/book/admin/books"
+          "https://node-routes-mysql.vercel.app/book/admin/books"
         );
         setBooks(response.data);
       } catch (err) {
@@ -73,6 +82,19 @@ export default function Panel() {
     };
     fetchBooks();
   }, []);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try{
+        const res = await axios.get(`https://node-routes-mysql.vercel.app/admin/${localStorage.getItem("admin")}`);
+        setAdmin(res.data);
+      }
+      catch(err){
+        console.log("Erro ao trazer os dados do usuário.", err)
+      }
+    }
+    fetchUser();
+  }, [])
 
   //ALTERA A COR DA LETRA DAS OPÇÕES
   const changeOptionColor = (id) => {
@@ -89,6 +111,38 @@ export default function Panel() {
     setInsertColor(id === insertColor ? id : id);
     setSelectedForm(id);
   };
+
+  const handleChange = (e) => {
+    setAdmin((prev) => ({...prev, [e.target.name] : e.target.value}));
+  };
+
+  const handleSubmit = async () => {
+    const updatedData = {...admin};
+
+    if(password){
+      if(password.length < 3){
+        toast.error("A senha deve ter no minimo 3 caractéres.", {
+          closeOnClick: true,
+        });
+        return;
+      }
+      
+      updatedData.password = password;
+    }
+
+    try{
+      await axios.put(`https://node-routes-mysql.vercel.app/admin/${localStorage.getItem("admin")}`, updatedData);
+      toast.success("Dados atualizados com sucesso!", {
+        closeOnClick: true,
+      })
+    }
+    catch(err){
+      toast.error("Erro ao atualizar os dados. Tente novamente mais tarde.", {
+        closeOnClick: true,
+      })
+      console.log("Erro ao atualizar os dados.", err);
+    }
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("admin");
@@ -144,11 +198,11 @@ export default function Panel() {
               </Item>
               <Item>
                 <Border>
-                  <img src={TrashPng} alt="Excluir" />
+                  <img src={PlusPng} alt="Adicionar funcionário" />
                 </Border>
                 <div>
-                  <h3>Excluir gêneros</h3>
-                  <p>Exclua gêneros de livros</p>
+                  <h3>Cadastre colaboradores</h3>
+                  <p>Inclua novos funcionários</p>
                 </div>
               </Item>
               <Item>
@@ -248,32 +302,40 @@ export default function Panel() {
                 </ContainerPng>
                 <Profile>
                   <Infos>
-                    <p>Primeiro Nome:</p>
-                    <InputProfile type="text" placeholder="Juan" />
-                  </Infos>
-                  <Infos>
-                    <p>Sobrenome</p>
-                    <InputProfile type="text" name="" placeholder="Pablo" />
+                    <p>Nome Completo:</p>
+                    <InputProfile type="text" placeholder="Juan" name="Nome" value={admin.Nome} onChange={handleChange}/>
                   </Infos>
                   <Infos>
                     <p>Email</p>
                     <InputProfile
                       type="text"
-                      name=""
+                      name="Email"
+                      value={admin.Email}
                       placeholder="juan@feitosa.com"
+                      onChange={handleChange}
+                    />
+                  </Infos>
+                  <Infos>
+                    <p>Telefone</p>
+                    <InputProfile
+                      type="text"
+                      name="Telefone"
+                      value={admin.Telefone}
+                      placeholder="999999999"
+                      onChange={handleChange}
                     />
                   </Infos>
                   <Infos>
                     <p>Senha</p>
-                    <InputProfile type="password" />
+                    <InputProfile type="password" onChange={(e) => setPassword(e.target.value)}/>
                   </Infos>
                 </Profile>
               </Fields>
               <ContainerButtonProfile>
                 {width < 768 ? (
-                  <ButtonProfile>Salvar</ButtonProfile>
+                  <ButtonProfile onClick={handleSubmit}>Salvar</ButtonProfile>
                 ) : (
-                  <ButtonProfile>Salvar Alterações</ButtonProfile>
+                  <ButtonProfile onClick={handleSubmit}>Salvar Alterações</ButtonProfile>
                 )}
               </ContainerButtonProfile>
             </ContainerProfile>
