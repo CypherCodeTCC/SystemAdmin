@@ -196,7 +196,7 @@ export default function Panel() {
                   <p>Saia da sua conta</p>
                 </div>
               </Item>
-              <Item>
+              <Item onClick={() => navigate('/register')}>
                 <Border>
                   <img src={PlusPng} alt="Adicionar funcionário" />
                 </Border>
