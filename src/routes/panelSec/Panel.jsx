@@ -57,7 +57,9 @@ export default function Panel() {
 
   const width = useWindowWidth();
   const [books, setBooks] = useState([]);
-  const [optionColor, setOptionColor] = useState(location.state?.optionColor || 1);
+  const [optionColor, setOptionColor] = useState(
+    location.state?.optionColor || 1
+  );
   const [insertColor, setInsertColor] = useState(1);
   const [isActive, setIsActive] = useState(1);
   const [selectedForm, setSelectedForm] = useState(1);
@@ -86,16 +88,19 @@ export default function Panel() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      try{
-        const res = await axios.get(`https://node-routes-mysql.vercel.app/admin/${localStorage.getItem("admin")}`);
+      try {
+        const res = await axios.get(
+          `https://node-routes-mysql.vercel.app/admin/${localStorage.getItem(
+            "admin"
+          )}`
+        );
         setAdmin(res.data);
+      } catch (err) {
+        console.log("Erro ao trazer os dados do usuário.", err);
       }
-      catch(err){
-        console.log("Erro ao trazer os dados do usuário.", err)
-      }
-    }
+    };
     fetchUser();
-  }, [])
+  }, []);
 
   //ALTERA A COR DA LETRA DAS OPÇÕES
   const changeOptionColor = (id) => {
@@ -114,36 +119,40 @@ export default function Panel() {
   };
 
   const handleChange = (e) => {
-    setAdmin((prev) => ({...prev, [e.target.name] : e.target.value}));
+    setAdmin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async () => {
-    const updatedData = {...admin};
+    const updatedData = { ...admin };
 
-    if(password){
-      if(password.length < 3){
+    if (password) {
+      if (password.length < 3) {
         toast.error("A senha deve ter no minimo 3 caractéres.", {
           closeOnClick: true,
         });
         return;
       }
-      
+
       updatedData.password = password;
     }
 
-    try{
-      await axios.put(`https://node-routes-mysql.vercel.app/admin/${localStorage.getItem("admin")}`, updatedData);
+    try {
+      await axios.put(
+        `https://node-routes-mysql.vercel.app/admin/${localStorage.getItem(
+          "admin"
+        )}`,
+        updatedData
+      );
       toast.success("Dados atualizados com sucesso!", {
         closeOnClick: true,
-      })
-    }
-    catch(err){
+      });
+    } catch (err) {
       toast.error("Erro ao atualizar os dados. Tente novamente mais tarde.", {
         closeOnClick: true,
-      })
+      });
       console.log("Erro ao atualizar os dados.", err);
     }
-  }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("admin");
@@ -197,7 +206,7 @@ export default function Panel() {
                   <p>Saia da sua conta</p>
                 </div>
               </Item>
-              <Item onClick={() => navigate('/register')}>
+              <Item onClick={() => navigate("/register")}>
                 <Border>
                   <img src={PlusPng} alt="Adicionar funcionário" />
                 </Border>
@@ -206,7 +215,7 @@ export default function Panel() {
                   <p>Inclua novos funcionários</p>
                 </div>
               </Item>
-              <Item>
+              <Item onClick={() => navigate("/author")}>
                 <Border>
                   <img src={TrashPng} alt="Excluir" />
                 </Border>
@@ -215,7 +224,7 @@ export default function Panel() {
                   <p>Exclua autores de livros</p>
                 </div>
               </Item>
-              <Item>
+              <Item onClick={() => navigate("/publishingcompany")}>
                 <Border>
                   <img src={TrashPng} alt="Excluir" />
                 </Border>
@@ -224,7 +233,7 @@ export default function Panel() {
                   <p>Exclua editoras de livros</p>
                 </div>
               </Item>
-              <Item>
+              <Item onClick={() => navigate("/books")}>
                 <Border>
                   <img src={TrashPng} alt="Excluir" />
                 </Border>
@@ -304,7 +313,13 @@ export default function Panel() {
                 <Profile>
                   <Infos>
                     <p>Nome Completo:</p>
-                    <InputProfile type="text" placeholder="Juan" name="Nome" value={admin.Nome} onChange={handleChange}/>
+                    <InputProfile
+                      type="text"
+                      placeholder="Juan"
+                      name="Nome"
+                      value={admin.Nome}
+                      onChange={handleChange}
+                    />
                   </Infos>
                   <Infos>
                     <p>Email</p>
@@ -328,7 +343,10 @@ export default function Panel() {
                   </Infos>
                   <Infos>
                     <p>Senha</p>
-                    <InputProfile type="password" onChange={(e) => setPassword(e.target.value)}/>
+                    <InputProfile
+                      type="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                   </Infos>
                 </Profile>
               </Fields>
@@ -336,7 +354,9 @@ export default function Panel() {
                 {width < 768 ? (
                   <ButtonProfile onClick={handleSubmit}>Salvar</ButtonProfile>
                 ) : (
-                  <ButtonProfile onClick={handleSubmit}>Salvar Alterações</ButtonProfile>
+                  <ButtonProfile onClick={handleSubmit}>
+                    Salvar Alterações
+                  </ButtonProfile>
                 )}
               </ContainerButtonProfile>
             </ContainerProfile>
