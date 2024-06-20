@@ -31,13 +31,14 @@ import {
   UlList,
 } from "./panelStyle";
 import Forms from "./Forms";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function Panel() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   /*
     CONTROLE DE ACESSO, PARA QUE NÃO SEJA POSSÍVEL ACESSAR A ROTA SEM ESTAR LOGADO
@@ -56,7 +57,7 @@ export default function Panel() {
 
   const width = useWindowWidth();
   const [books, setBooks] = useState([]);
-  const [optionColor, setOptionColor] = useState(1);
+  const [optionColor, setOptionColor] = useState(location.state?.optionColor || 1);
   const [insertColor, setInsertColor] = useState(1);
   const [isActive, setIsActive] = useState(1);
   const [selectedForm, setSelectedForm] = useState(1);

@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Options = styled.a`
-  color: ${(props) => (props.isActive ? "blue" : "")};
+  color: #b1b1b1;
   font-size: 18px;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+
+  .blue {
+    color: blue;
+  }
 `;
 
 export const Input = styled.input`
@@ -19,5 +23,23 @@ export const Input = styled.input`
 
   @media (max-width: 767px) {
     width: 100%;
+  }
+`;
+
+export const ButtonRegister = styled.button`
+  background-color: ${props => props.isActive ? "#1814f3" : "#b1b1b1"};
+  border-radius: 15px;
+  width: 248.2px;
+  height: 63.6px;
+  color: ${props => props.isActive ? "#ffffff" : "black"};
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  cursor: ${props => props.isActive ? "pointer" : "not-allowed"};
+
+  @media (max-width: 767px) {
+    width: 96px;
+    height: 28px;
+    font-size: 14px;
   }
 `;
