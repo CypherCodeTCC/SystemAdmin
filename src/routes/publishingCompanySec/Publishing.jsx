@@ -13,6 +13,7 @@ import {
 import { Options } from "../registerSec/registerStyle";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Publishing() {
   const navigate = useNavigate();
@@ -37,6 +38,26 @@ export default function Publishing() {
   const changeOptionColor = (id) => {
     setOptionColor(id === optionColor ? id : id);
     navigate("/panel", { state: { optionColor: id } });
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Deseja excluir a editora?");
+
+    if(confirmDelete){
+      try{
+        await axios.delete(`https://node-routes-mysql.vercel.app/publishingcompany/${id}`);
+        toast.info("Editora excluida com sucesso.", {
+          closeOnClick: true,
+        });
+        window.location.reload();
+      }
+      catch(err){
+        toast.error("Erro ao excluir a editora. Tente novamente mais tarde.", {
+          closeOnClick: true,
+        });
+        console.log("Erro ao excluir a editora.", err);
+      }
+    }
   };
 
   return (
@@ -78,7 +99,7 @@ export default function Publishing() {
                   <ButtonTable>Modificar</ButtonTable>
                 </Td>
                 <Td>
-                  <ButtonDelete>Apagar</ButtonDelete>
+                  <ButtonDelete onClick={() => handleDelete(publishingCompany.id)}>Apagar</ButtonDelete>
                 </Td>
               </Tr>
             ))}

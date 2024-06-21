@@ -22,7 +22,7 @@ export default function Book() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/book/admin/books");
+        const res = await axios.get("https://node-routes-mysql.vercel.app/book");
         setBooks(res.data);
       } catch (err) {
         console.log("Erro ao encontrar os livros", err);
@@ -30,6 +30,8 @@ export default function Book() {
     };
     fetchBooks();
   }, []);
+
+  console.log(books);
 
   //ALTERA A COR DA LETRA DAS OPÇÕES
   const changeOptionColor = (id) => {
@@ -53,8 +55,7 @@ export default function Book() {
         });
         console.log("Erro ao excluir o livro.", err);
       }
-    } else {
-    }
+    } 
   };
 
   return (
@@ -85,19 +86,19 @@ export default function Book() {
             <Th>Id</Th>
             <Th>Título</Th>
             <Th>Editora</Th>
-            <Th>Autor</Th>
             <Th>Gênero</Th>
+            <Th>Preço</Th>
             <Th>Avaliação</Th>
             <Th>Apagar</Th>
           </thead>
           <tbody>
             {books.map((book) => (
-              <Tr className="books" key={book.Id}>
-                <Td>{book.Id}</Td>
-                <Td>R${book.Preco}</Td>
-                <Td>{book.Editora}</Td>
-                <Td>{book.Autor}</Td>
-                <Td>{book.Genero}</Td>
+              <Tr className="books" key={book.id}>
+                <Td>{book.id}</Td>
+                <Td>{book.name}</Td>
+                <Td>{book.publishing_company.name}</Td>
+                <Td>{book.genre.name}</Td>
+                <Td>R${book.price.toFixed(2)}</Td>
                 <Td>5.0</Td>
                 <Td>
                   <ButtonDelete onClick={() => handleDelete(book.Id)}>
