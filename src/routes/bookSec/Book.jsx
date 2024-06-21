@@ -31,8 +31,6 @@ export default function Book() {
     fetchBooks();
   }, []);
 
-  console.log(books);
-
   //ALTERA A COR DA LETRA DAS OPÇÕES
   const changeOptionColor = (id) => {
     setOptionColor(id === optionColor ? id : id);

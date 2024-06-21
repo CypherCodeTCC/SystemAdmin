@@ -25,7 +25,6 @@ export default function NavBar() {
     window.addEventListener("resize", handleResize);
   }, [userMenuOpen]);
 
-  console.log(userMenuOpen);
   return (
     <>
       <Container className="container">

@@ -96,7 +96,7 @@ export default function Publishing() {
                 <Td>{publishingCompany.id}</Td>
                 <Td>{publishingCompany.name}</Td>
                 <Td>
-                  <ButtonTable>Modificar</ButtonTable>
+                  <ButtonTable onClick={() => navigate(`/publishingcompany/${publishingCompany.id}`)}>Modificar</ButtonTable>
                 </Td>
                 <Td>
                   <ButtonDelete onClick={() => handleDelete(publishingCompany.id)}>Apagar</ButtonDelete>

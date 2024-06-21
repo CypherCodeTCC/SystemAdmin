@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Book from "./routes/bookSec/Book";
 import Publishing from "./routes/publishingCompanySec/Publishing";
 import Author from "./routes/authorSec/Author";
+import UpdatePublishing from "./routes/updatePublishingSec/UpdatePublishing";
 
 export default function RoutesConfig() {
   return (
@@ -23,6 +24,7 @@ export default function RoutesConfig() {
         <Route path="/books" element={<Book />} />
         <Route path="/publishingcompany" element={<Publishing />} />
         <Route path="/author" element={<Author />} />
+        <Route path="/publishingcompany/:id" element={<UpdatePublishing />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
