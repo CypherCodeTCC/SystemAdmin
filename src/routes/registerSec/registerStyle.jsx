@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IMaskInput } from "react-imask";
 
 export const Options = styled.a`
   color: #b1b1b1;
@@ -12,7 +13,7 @@ export const Options = styled.a`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled(IMaskInput)`
   border: 1px solid;
   height: 63.6px;
   font-weight: 400;

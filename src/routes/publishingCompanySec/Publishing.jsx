@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ButtonDelete, Container } from "../bookSec/bookStyle";
+import { ButtonDelete, Container, ContainerScroll } from "../bookSec/bookStyle";
 import {
   ButtonTable,
   ContainerOptions,
@@ -43,15 +43,16 @@ export default function Publishing() {
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Deseja excluir a editora?");
 
-    if(confirmDelete){
-      try{
-        await axios.delete(`https://node-routes-mysql.vercel.app/publishingcompany/${id}`);
+    if (confirmDelete) {
+      try {
+        await axios.delete(
+          `https://node-routes-mysql.vercel.app/publishingcompany/${id}`
+        );
         toast.info("Editora excluida com sucesso.", {
           closeOnClick: true,
         });
         window.location.reload();
-      }
-      catch(err){
+      } catch (err) {
         toast.error("Erro ao excluir a editora. Tente novamente mais tarde.", {
           closeOnClick: true,
         });
@@ -83,28 +84,40 @@ export default function Publishing() {
             </LiOptions>
           </ListOptions>
         </ContainerOptions>
-        <Containerinfos>
-          <thead>
-            <Th>Id</Th>
-            <Th>Nome da Editora</Th>
-            <Th>Modificar</Th>
-            <Th>Apagar</Th>
-          </thead>
-          <tbody>
-            {publishingCompanies.map((publishingCompany) => (
-              <Tr className="publishingcompany" key={publishingCompany.Id}>
-                <Td>{publishingCompany.id}</Td>
-                <Td>{publishingCompany.name}</Td>
-                <Td>
-                  <ButtonTable onClick={() => navigate(`/publishingcompany/${publishingCompany.id}`)}>Modificar</ButtonTable>
-                </Td>
-                <Td>
-                  <ButtonDelete onClick={() => handleDelete(publishingCompany.id)}>Apagar</ButtonDelete>
-                </Td>
-              </Tr>
-            ))}
-          </tbody>
-        </Containerinfos>
+        <ContainerScroll>
+          <Containerinfos>
+            <thead>
+              <Th>Id</Th>
+              <Th>Nome da Editora</Th>
+              <Th>Modificar</Th>
+              <Th>Apagar</Th>
+            </thead>
+            <tbody>
+              {publishingCompanies.map((publishingCompany) => (
+                <Tr className="publishingcompany" key={publishingCompany.Id}>
+                  <Td>{publishingCompany.id}</Td>
+                  <Td>{publishingCompany.name}</Td>
+                  <Td>
+                    <ButtonTable
+                      onClick={() =>
+                        navigate(`/publishingcompany/${publishingCompany.id}`)
+                      }
+                    >
+                      Modificar
+                    </ButtonTable>
+                  </Td>
+                  <Td>
+                    <ButtonDelete
+                      onClick={() => handleDelete(publishingCompany.id)}
+                    >
+                      Apagar
+                    </ButtonDelete>
+                  </Td>
+                </Tr>
+              ))}
+            </tbody>
+          </Containerinfos>
+        </ContainerScroll>
       </Container>
     </>
   );

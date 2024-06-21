@@ -80,6 +80,64 @@ export default function Register() {
     }
   };
 
+  const clearCep = () => {
+    setAdmin((prev) => ({
+      ...prev,
+      Logradouro: "",
+      NomeCid: "",
+      Uf: "",
+    }));
+  };
+
+  const myCallback = (content) => {
+    if(!("erro" in content)) {
+      setAdmin((prev) => ({
+        ...prev,
+        Logradouro: content.logradouro,
+        NomeCid: content.localidade,
+        Uf: content.uf,
+      }));
+    }
+    else{
+      clearCep();
+      alert("CEP não encontrado.");
+    }
+  }
+
+  const searchCep = async (value) => {
+    const cep =  value.replace(/\D/g, "");
+
+    if(cep !== "") {
+      const confirmCep = /^[0-9]{8}$/; 
+
+      if(confirmCep.test(cep)){
+        try{
+          const res = await fetch(`https://viacep.com.br/ws/${cep}/json`);
+          const data = await res.json();
+          myCallback(data);
+        }
+        catch(err){
+          clearCep();
+          console.log(err);
+          alert("Erro ao buscar CEP. Tente Novamente");
+        }
+      }
+      else{
+        clearCep();
+        alert("Formato de CEP inválido.");
+      }
+    }
+    else{
+      clearCep();
+    }
+  }
+
+  const handleBlur = (e) => {
+    const cepValue = e.target.value;
+    setAdmin((prev) => ({...prev, CEP: cepValue}));
+    searchCep(cepValue);
+  }
+
   const renderForm = () => {
     switch (isActive) {
       case 1:
@@ -100,6 +158,7 @@ export default function Register() {
                 <Infos>
                   <p>CPF</p>
                   <Input
+                    mask="000.000.000-00"
                     type="text"
                     name="CPF"
                     value={admin.CPF}
@@ -120,6 +179,7 @@ export default function Register() {
                 <Infos>
                   <p>Telefone</p>
                   <Input
+                    mask="00000-0000"
                     type="text"
                     name="Telefone"
                     value={admin.Telefone}
@@ -158,11 +218,13 @@ export default function Register() {
                 <Infos>
                   <p>CEP</p>
                   <Input
+                    mask="00000-000"
                     type="text"
                     name="CEP"
                     value={admin.CEP}
                     placeholder="Digite o CEP"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                 </Infos>
                 <Infos>
@@ -171,8 +233,7 @@ export default function Register() {
                     type="text"
                     name="Logradouro"
                     value={admin.Logradouro}
-                    placeholder="Digite o logradouro"
-                    onChange={handleChange}
+                    readOnly
                   />
                 </Infos>
                 <Infos>
@@ -183,6 +244,7 @@ export default function Register() {
                     value={admin.NumeroEnd}
                     placeholder="Digite o número"
                     onChange={handleChange}
+                    maxLength="5"
                   />
                 </Infos>
                 <Infos>
@@ -193,6 +255,7 @@ export default function Register() {
                     value={admin.Complemento}
                     placeholder="Digite o complemento"
                     onChange={handleChange}
+                    maxLength="10"
                   />
                 </Infos>
                 <Infos>
@@ -201,8 +264,7 @@ export default function Register() {
                     type="text"
                     name="NomeCid"
                     value={admin.NomeCid}
-                    placeholder="Digite a cidade"
-                    onChange={handleChange}
+                    readOnly
                   />
                 </Infos>
                 <Infos>
@@ -211,8 +273,7 @@ export default function Register() {
                     type="text"
                     name="Uf"
                     value={admin.Uf}
-                    placeholder="Digite o estado"
-                    onChange={handleChange}
+                    readOnly
                   />
                 </Infos>
                 <ContainerButtonProfile>

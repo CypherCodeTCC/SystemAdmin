@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IMaskInput } from "react-imask";
 
 export const Container = styled.section`
   @import url("https://fonts.googleapis.com/css?family=inter:100,200,300,400,500,600,700,800,900&display=swap");
@@ -331,7 +332,7 @@ export const ContainerButtonProfile = styled.div`
   }
 `;
 
-export const InputProfile = styled.input`
+export const InputProfile = styled(IMaskInput)`
   border: 1px solid #dfeaf2;
   height: 63.6px;
   font-weight: 400;
