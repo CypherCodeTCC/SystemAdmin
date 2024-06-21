@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import NavBar from "./components/nav/NavBar";
@@ -13,12 +14,14 @@ import Author from "./routes/authorSec/Author";
 import UpdatePublishing from "./routes/updatePublishingSec/UpdatePublishing";
 
 export default function RoutesConfig() {
+  const [isUserLogged, setIsUserLogged] = useState(false);
+
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar isUserLogged={isUserLogged} setIsUserLogged={setIsUserLogged} />
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login setIsUserLogged={setIsUserLogged} />} />
         <Route path="/panel" element={<Panel />} />
         <Route path="/register" element={<Register />} />
         <Route path="/books" element={<Book />} />

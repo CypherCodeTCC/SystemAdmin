@@ -7,7 +7,13 @@ import {
   ListOptions,
 } from "../panelSec/panelStyle";
 import { Options } from "../registerSec/registerStyle";
-import { ButtonCancelar, ButtonUpdate, ContainerButton, ContainerUpdate, InputPublishing } from "./updatePublishingStyle";
+import {
+  ButtonCancelar,
+  ButtonUpdate,
+  ContainerButton,
+  ContainerUpdate,
+  InputPublishing,
+} from "./updatePublishingStyle";
 import { Container } from "../bookSec/bookStyle";
 import { toast } from "react-toastify";
 
@@ -19,7 +25,7 @@ export default function UpdatePublishing() {
 
   const [data, setData] = useState({
     name: "",
-  })
+  });
 
   useEffect(() => {
     const fetchPublishing = async () => {
@@ -43,26 +49,26 @@ export default function UpdatePublishing() {
   };
 
   const handleChanged = (e) => {
-    setData((prev) => ({...prev, [e.target.name] : e.target.value}))
-  }
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleUpdate = async () => {
-    try{
-      await axios.put(`https://node-routes-mysql.vercel.app/publishingcompany/${id}`, data);
+    try {
+      await axios.put(
+        `https://node-routes-mysql.vercel.app/publishingcompany/${id}`,
+        data
+      );
       toast.success("Editora atualizada com sucesso!", {
         closeOnClick: true,
       });
-      navigate('/publishingcompany');
-    }
-    catch(err){
+      navigate("/publishingcompany");
+    } catch (err) {
       toast.error("Erro ao atualizar a editora. Tente novamente mais tarde.", {
         closeOnClick: true,
       });
       console.log("Erro ao atualizar a editora.", err);
     }
-  }
-
-  console.log(data);
+  };
 
   return (
     <>
@@ -88,12 +94,19 @@ export default function UpdatePublishing() {
           </ListOptions>
         </ContainerOptions>
         <ContainerUpdate>
-            <h1>Atualize a editora</h1>
-            <InputPublishing type="text" name="name" value={data.name} onChange={handleChanged}/>
-            <ContainerButton>
-                <ButtonCancelar onClick={() => navigate('/panel')}>Cancelar</ButtonCancelar>
-                <ButtonUpdate onClick={handleUpdate}>Salvar</ButtonUpdate>
-            </ContainerButton>
+          <h1>Atualize a editora</h1>
+          <InputPublishing
+            type="text"
+            name="name"
+            value={data.name}
+            onChange={handleChanged}
+          />
+          <ContainerButton>
+            <ButtonCancelar onClick={() => navigate("/panel")}>
+              Cancelar
+            </ButtonCancelar>
+            <ButtonUpdate onClick={handleUpdate}>Salvar</ButtonUpdate>
+          </ContainerButton>
         </ContainerUpdate>
       </Container>
     </>

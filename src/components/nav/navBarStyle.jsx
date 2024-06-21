@@ -64,6 +64,11 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 100px;
+
+  li {
+    padding: 10px;
+    cursor: pointer;
+  }
 `;
 
 export const LiBotao = styled.li`

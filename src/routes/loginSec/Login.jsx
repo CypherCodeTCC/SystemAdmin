@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Login() {
+// eslint-disable-next-line react/prop-types
+export default function Login({ setIsUserLogged }) {
   const navigate = useNavigate();
 
   /* CASO O ADMIN JÁ TENHA LOGADO, ELE NÃO CONSEGUE VOLTAR PARA A TELA DE LOGIN. */
@@ -49,6 +50,7 @@ export default function Login() {
       if (res.data.message == "Login Successful") {
         localStorage.setItem("admin", JSON.stringify(res.data.user.Id));
         navigate("/panel");
+        setIsUserLogged(true);
         toast.success("Login efetuado com sucesso.", {
           closeOnClick: true,
         });

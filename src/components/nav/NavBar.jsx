@@ -9,8 +9,12 @@ import {
   List,
   MenuMobile,
 } from "./navBarStyle";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-export default function NavBar() {
+// eslint-disable-next-line react/prop-types
+export default function NavBar({ isUserLogged, setIsUserLogged }) {
+  const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const toggleUserMenu = () => {
@@ -25,6 +29,22 @@ export default function NavBar() {
     window.addEventListener("resize", handleResize);
   }, [userMenuOpen]);
 
+  const handleRoutes = (route) => {
+    setUserMenuOpen(false);
+    navigate(route);
+  };
+
+  const handleLogout = () => {
+    setIsUserLogged(false);
+    setUserMenuOpen(false);
+    localStorage.removeItem("admin");
+    navigate("/");
+
+    toast.info("Você deslogou do sistema.", {
+      closeOnClick: true,
+    });
+  };
+
   return (
     <>
       <Container className="container">
@@ -33,33 +53,39 @@ export default function NavBar() {
         </div>
         <div className="container-icons">
           <img src={PngUser} alt="Botão para logar" />
-          <MenuMobile>
-            {!userMenuOpen ? (
-              <span
-                id="burger"
-                className="material-symbols-outlined"
-                onClick={toggleUserMenu}
-              >
-                menu
-              </span>
-            ) : (
-              <span
-                id="close"
-                className="material-symbols-outlined"
-                onClick={toggleUserMenu}
-              >
-                close
-              </span>
-            )}
-          </MenuMobile>
+          {isUserLogged && (
+            <MenuMobile>
+              {!userMenuOpen ? (
+                <span
+                  id="burger"
+                  className="material-symbols-outlined"
+                  onClick={toggleUserMenu}
+                >
+                  menu
+                </span>
+              ) : (
+                <span
+                  id="close"
+                  className="material-symbols-outlined"
+                  onClick={toggleUserMenu}
+                >
+                  close
+                </span>
+              )}
+            </MenuMobile>
+          )}
           <DropUser isOpen={userMenuOpen}>
             <List>
-              <li>Excluir Autores</li>
-              <li>Excluir Gêneros</li>
-              <li>Excluir Livros</li>
-              <li>Excluir Autores</li>
+              <li onClick={() => handleRoutes("/author")}>Excluir Autores</li>
+              <li onClick={() => handleRoutes("/register")}>
+                Cadastrar Funcionário
+              </li>
+              <li onClick={() => handleRoutes("/books")}>Excluir Livros</li>
+              <li onClick={() => handleRoutes("/publishingcompany")}>
+                Excluir Editoras
+              </li>
               <LiBotao>
-                <ALiBotao>Logout</ALiBotao>
+                <ALiBotao onClick={handleLogout}>Logout</ALiBotao>
               </LiBotao>
             </List>
           </DropUser>
