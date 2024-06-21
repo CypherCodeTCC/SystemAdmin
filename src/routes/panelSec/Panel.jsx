@@ -17,6 +17,7 @@ import {
   ContainerOptions,
   ContainerPng,
   ContainerProfile,
+  ContainerScroll,
   Containerinfos,
   Fields,
   Infos,
@@ -168,34 +169,36 @@ export default function Panel() {
       case 1:
         return (
           <>
-            <Containerinfos>
-              <thead>
-                <tr>
-                  <Th>Id</Th>
-                  <Th>Preço</Th>
-                  <Th>Editora</Th>
-                  <Th>Autor</Th>
-                  <Th>Gênero</Th>
-                  <Th>Avaliação</Th>
-                  <Th>Modificar</Th>
-                </tr>
-              </thead>
-              <tbody>
-                {books.map((book) => (
-                  <Tr className="books" key={book.Id}>
-                    <Td>{book.Id}</Td>
-                    <Td>R${book.Preco}</Td>
-                    <Td>{book.Editora}</Td>
-                    <Td>{book.Autor}</Td>
-                    <Td>{book.Genero}</Td>
-                    <Td>5.0</Td>
-                    <Td>
-                      <ButtonTable>Modificar</ButtonTable>
-                    </Td>
-                  </Tr>
-                ))}
-              </tbody>
-            </Containerinfos>
+            <ContainerScroll>
+              <Containerinfos>
+                <thead>
+                  <tr>
+                    <Th>Id</Th>
+                    <Th>Preço</Th>
+                    <Th>Editora</Th>
+                    <Th>Autor</Th>
+                    <Th>Gênero</Th>
+                    <Th>Avaliação</Th>
+                    <Th>Modificar</Th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {books.map((book) => (
+                    <Tr className="books" key={book.Id}>
+                      <Td>{book.Id}</Td>
+                      <Td>R${book.Preco}</Td>
+                      <Td>{book.Editora}</Td>
+                      <Td>{book.Autor}</Td>
+                      <Td>{book.Genero}</Td>
+                      <Td>5.0</Td>
+                      <Td>
+                        <ButtonTable>Modificar</ButtonTable>
+                      </Td>
+                    </Tr>
+                  ))}
+                </tbody>
+              </Containerinfos>
+            </ContainerScroll>
             <ContainerConfig>
               <Item onClick={handleLogout}>
                 <Border>

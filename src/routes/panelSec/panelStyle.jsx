@@ -57,8 +57,19 @@ export const AOptions = styled.a`
   cursor: pointer;
 `;
 
+export const ContainerScroll = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+`;
+
 export const Containerinfos = styled.table`
-  width: 60%;
+  width: 100%;
   height: max-content;
   margin-top: 20px;
 
