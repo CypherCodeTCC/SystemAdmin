@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ButtonDelete, Container } from "../bookSec/bookStyle";
+import { ButtonDelete, Container, ContainerScroll } from "../bookSec/bookStyle";
 import {
   ButtonTable,
   ContainerOptions,
@@ -79,30 +79,32 @@ export default function Author() {
             </LiOptions>
           </ListOptions>
         </ContainerOptions>
-        <Containerinfos>
-          <thead>
-            <Th>Id</Th>
-            <Th>Nome</Th>
-            <Th>Modificar</Th>
-            <Th>Apagar</Th>
-          </thead>
-          <tbody>
-            {authors.map((author) => (
-              <Tr className="publishingcompany" key={author.id}>
-                <Td>{author.id}</Td>
-                <Td>{author.name}</Td>
-                <Td>
-                  <ButtonTable>Modificar</ButtonTable>
-                </Td>
-                <Td>
-                  <ButtonDelete onClick={() => handleDelete(author.id)}>
-                    Apagar
-                  </ButtonDelete>
-                </Td>
-              </Tr>
-            ))}
-          </tbody>
-        </Containerinfos>
+        <ContainerScroll>
+          <Containerinfos>
+            <thead>
+              <Th>Id</Th>
+              <Th>Nome</Th>
+              <Th>Modificar</Th>
+              <Th>Apagar</Th>
+            </thead>
+            <tbody>
+              {authors.map((author) => (
+                <Tr className="publishingcompany" key={author.id}>
+                  <Td>{author.id}</Td>
+                  <Td>{author.name}</Td>
+                  <Td>
+                    <ButtonTable>Modificar</ButtonTable>
+                  </Td>
+                  <Td>
+                    <ButtonDelete onClick={() => handleDelete(author.id)}>
+                      Apagar
+                    </ButtonDelete>
+                  </Td>
+                </Tr>
+              ))}
+            </tbody>
+          </Containerinfos>
+        </ContainerScroll>
       </Container>
     </>
   );

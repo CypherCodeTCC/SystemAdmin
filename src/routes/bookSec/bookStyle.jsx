@@ -15,6 +15,17 @@ export const Container = styled.section`
   }
 `;
 
+export const ContainerScroll = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+`
+
 export const ButtonDelete = styled.button`
   width: 100px;
   height: 35px;

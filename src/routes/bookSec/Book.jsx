@@ -11,7 +11,7 @@ import {
 import { Options } from "../registerSec/registerStyle";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ButtonDelete, Container } from "./bookStyle";
+import { ButtonDelete, Container, ContainerScroll } from "./bookStyle";
 import { toast } from "react-toastify";
 
 export default function Book() {
@@ -79,6 +79,7 @@ export default function Book() {
             </LiOptions>
           </ListOptions>
         </ContainerOptions>
+        <ContainerScroll>
         <Containerinfos>
           <thead>
             <Th>Id</Th>
@@ -107,6 +108,7 @@ export default function Book() {
             ))}
           </tbody>
         </Containerinfos>
+        </ContainerScroll>
       </Container>
     </>
   );
