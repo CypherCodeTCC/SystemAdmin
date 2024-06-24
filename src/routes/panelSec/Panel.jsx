@@ -79,7 +79,7 @@ export default function Panel() {
         const response = await axios.get(
           "https://node-routes-mysql.vercel.app/book/admin/books"
         );
-        setBooks(response.data);
+        setBooks(response.data.slice(0, 8));
       } catch (err) {
         console.log("Erro ao trazer os livros.", err);
       }

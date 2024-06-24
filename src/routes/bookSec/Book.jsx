@@ -100,7 +100,7 @@ export default function Book() {
                 <Td>R${book.price.toFixed(2)}</Td>
                 <Td>5.0</Td>
                 <Td>
-                  <ButtonDelete onClick={() => handleDelete(book.Id)}>
+                  <ButtonDelete onClick={() => handleDelete(book.id)}>
                     Apagar
                   </ButtonDelete>
                 </Td>
