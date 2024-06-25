@@ -134,6 +134,9 @@ export default function Forms({ selectedForm }) {
       case 1:
         return (
           <>
+              <h2>
+                Adicione um livro ao sistema!
+              </h2>
             <Card>
               <h3>Titulo do Livro</h3>
               <Input type="text" placeholder="Apenas letras" onChange={handleChange} name="name" value={formData.book.name} />
@@ -172,6 +175,9 @@ export default function Forms({ selectedForm }) {
       case 2:
         return (
           <>
+              <h2>
+                Adicione um gênero ao sistema!
+              </h2>
             <Card>
               <h3>Nome do gênero</h3>
               <Input
@@ -198,6 +204,9 @@ export default function Forms({ selectedForm }) {
       case 3:
         return (
           <>
+              <h2>
+                Adicione uma editora ao sistema!
+              </h2>
             <CardPublishing>
               <h3>Nome da editora</h3>
               <Input

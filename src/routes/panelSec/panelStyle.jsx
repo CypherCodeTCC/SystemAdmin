@@ -215,6 +215,10 @@ export const ContainerInsert = styled.div`
   width: 50%;
   margin: auto;
 
+  h2{
+    width: 100%;
+  }
+
   .blue {
     color: blue;
     cursor: pointer;

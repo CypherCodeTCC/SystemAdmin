@@ -283,10 +283,6 @@ export default function Panel() {
                   </AList>
                 </li>
               </UlList>
-              <h2>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                Pellentesque et mi nec neque fermentum vehicula.
-              </h2>
               <Forms selectedForm={selectedForm} />
             </ContainerInsert>
           </>
