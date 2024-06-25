@@ -333,7 +333,7 @@ export default function Panel() {
                   <Infos>
                     <p>Telefone</p>
                     <InputProfile
-                      mask="00000-0000"
+                      mask="(00) 90000-0000"
                       type="text"
                       name="Telefone"
                       value={admin.Telefone}
