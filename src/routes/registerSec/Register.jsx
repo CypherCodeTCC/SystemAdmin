@@ -179,7 +179,7 @@ export default function Register() {
                 <Infos>
                   <p>Telefone</p>
                   <Input
-                    mask="00000-0000"
+                    mask="(00) 90000-0000"
                     type="text"
                     name="Telefone"
                     value={admin.Telefone}
